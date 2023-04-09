@@ -13,6 +13,7 @@ const carBrands = {
   const button = document.querySelector('.button');
   const resetButton = document.querySelector('.reset-button');
 
+  let brandCoefficient;
   let fuelCoefficient;
   let engineCapacityCoefficient;
   let conditionCoefficient;
@@ -25,13 +26,22 @@ const carBrands = {
     carModel.innerHTML = "";
     var c = this.value || "none", o;
     for(let i = 0; i < carBrands[c].length; i++){
-      o = new Option(carBrands[c][i],i,false,false);
+      o = new Option(carBrands[c][i],carBrands[c][i],false,false);
       carModel.add(o);
     };
   }
 
+  //BRAND RATE
+  function rateBrand() {
+    if (carBrand.value == "opel" || carBrand.value == "reno" ) {
+      brandCoefficient = 20;
+    }
+    else brandCoefficient = 50;
+    return brandCoefficient;
+  };
+
   //FUEL RATE
-  function rateFuel () {
+  function rateFuel() {
     const radioFuel = document.querySelector('input[name="fuel"]:checked');
     if (radioFuel.value == 'gas') {
         fuelCoefficient = 1.5;
@@ -96,22 +106,32 @@ const carBrands = {
     }
     else hiddenDiv.style.display="none";
   }
-
+    //CHECK BRAND AND SHOW MESSAGE
+  let checkBrandChoice = () => {
+    let span = document.getElementById('hidden-brand-msg');
+    if (carBrand.value == "none") {
+        span.style.display="";
+    }
+    else span.style.display="none";
+  };
 
 
   //COUNT PRICE (base * ...)
   function countPrice() {
-  totalCost.innerText = 50000 * (fuelCoefficient + engineCapacityCoefficient + conditionCoefficient);
+  totalCost.innerText = 50000 * (fuelCoefficient + engineCapacityCoefficient + conditionCoefficient + brandCoefficient);
   };
 
 
   button.addEventListener('click', function(evt) {
     evt.preventDefault();
+    checkBrandChoice ();
+    if (carBrand.value !== "none") {
+    rateBrand()   
     rateFuel();
     rateCapacity();
     rateCondition();
-
     countPrice();
+    }
   });
 
   //RESET FORM
@@ -119,3 +139,12 @@ const carBrands = {
     form.reset();
     totalCost.innerText ="";
   });
+
+
+
+  //ЗАДАНИЕ ПОД ЗВЕЗДОЧКОЙ
+  console.log(/^(20\d\d|20\d\d|2100)$/.test('2000'));
+  let result = "asdffgs ghjk".replace(/\W*\w*(\w)\1\w*\W*/g, " "); 
+  console.log(result);
+  let result2 = "jh ggg ggg ggg jhjh".replace(/\b(\w+)\b(?:\s+\1\b)+/g, "$1");
+  console.log(result2);
