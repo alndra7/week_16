@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <h1>Калькулятор стоимости автомобиля</h1>
+      <form name="form">
+        <div>
+          <h2>Марка автомобиля</h2>
+          <select name="car-brand" id="car-brand">
+            <option value="none">не выбрана...</option>
+            <option value="opel">Opel</option>
+            <option value="reno">Reno</option>
+            <option value="mazda">Mazda</option>
+            <option value="jaguar">Jaguar</option>
+          </select>
+          <select name="car-model" id="car-model"></select>
+        </div>
+
+        <div>
+          <h2>Топливо</h2>
+          <label>
+            <input type="radio" name="fuel" value="diesel" />
+            <span>Дизель</span>
+          </label>
+          <label>
+            <input type="radio" name="fuel" value="gasoline" checked />
+            <span>Бензин</span>
+          </label>
+          <label>
+            <input type="radio" name="fuel" value="gas" />
+            <span>Газ</span>
+          </label>
+          <label>
+            <input type="radio" name="fuel" value="electro" />
+            <span>Электро</span>
+          </label>
+        </div>
+
+        <div>
+          <h2>Объем двигателя</h2>
+          Введите значение от 1.1 до 3.5 л </br>
+          <input type="number" name="engine-capacity" min="1.1" max="3.5" step="0.1" value="1.1" onchange="showCheckNote()"/><span> л.</span>
+        </div>
+
+        <!-- HIDDEN -->
+        <div style="display: none" id="hidden">Неправильное значение
+        </div>
+
+        <div>
+          <h2>Состояние автомобиля</h2>
+          <label>
+            <input type="radio" name="condition" value="new" onchange="showOwnersRadio()" checked/>
+            <span>Новый</span>
+          </label>
+          <label>
+            <input type="radio" name="condition" value="used" onchange="showOwnersRadio()"  />
+            <span>Подержанный</span>
+          </label>
+        </div>
+
+        <!-- HIDDEN -->
+        <div style="display: none" id="owners-radio">
+            <h2>Количество владельцев</h2>
+          <label>
+            <input type="radio" name="owners" value="less" checked />
+            <span>1-2</span>
+          </label>
+          <label>
+            <input type="radio" name="owners" value="more" />
+            <span>3+</span>
+          </label>
+        </div>
+
+        <div>
+          <h2>Выбрать способ оплаты</h2>
+          <label>
+            <input type="radio" name="payment" value="card" checked />
+            <span>Карта</span>
+          </label>
+          <label>
+            <input type="radio" name="payment" value="cash" />
+            <span>Наличные</span>
+          </label>
+          <label>
+            <input type="radio" name="payment" value="bank-account" />
+            <span>Счет на юридическое лицо</span>
+          </label>
+        </div>
+
+        <div>
+          <h2>Итого:</h2>
+          <button class="button">Рассчитать стоимость</button>
+          <span class="total-cost"></span> руб. 
+        </div>
+
+        <div><br>
+        <button class="reset-button">Очистить форму</button>
+        </div>
+      </form>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>
